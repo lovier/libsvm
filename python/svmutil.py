@@ -10,7 +10,27 @@ __all__ = ['evaluations', 'svm_load_model', 'svm_predict', 'svm_read_problem',
            'svm_save_model', 'svm_train'] + svm_all
 
 sys.path = [os.path.dirname(os.path.abspath(__file__))] + sys.path
+def svm_problem_from_string(content):
+	"""
+	svm_problem_from_string(content) -> [y, x]
 
+	Read LIBSVM-format data from string and return labels y and data instances x.
+	"""
+	prob_y = []
+	prob_x = []
+	for line in content.split('\n'):
+		#print(line)
+		line = line.split(None, 1)
+		# In case an instance with all zero features
+		if len(line) == 1: line += ['']
+		label, features = line
+		xi = {}
+		for e in features.split():
+			ind, val = e.split(":")
+			xi[int(ind)] = float(val)
+		prob_y += [float(label)]
+		prob_x += [xi]
+	return (prob_y, prob_x)
 def svm_read_problem(data_file_name):
 	"""
 	svm_read_problem(data_file_name) -> [y, x]
