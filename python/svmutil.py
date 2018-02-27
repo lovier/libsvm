@@ -6,7 +6,7 @@ from svm import *
 from svm import __all__ as svm_all
 
 
-__all__ = ['evaluations', 'svm_load_model', 'svm_predict', 'svm_read_problem',
+__all__ = ['evaluations', 'svm_load_model', 'svm_predict', 'svm_read_problem','svm_problem_from_string',
            'svm_save_model', 'svm_train'] + svm_all
 
 sys.path = [os.path.dirname(os.path.abspath(__file__))] + sys.path
